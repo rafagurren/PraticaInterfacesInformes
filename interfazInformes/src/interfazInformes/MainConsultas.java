@@ -17,16 +17,43 @@ import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
+/**
+ * 
+ * @author Rafael Peral Jimenez
+ *
+ */
 public class MainConsultas extends JFrame {
-
+	/**
+	 * El parametro card guarda el JPanel con el CardLayout 
+	 */
 	private JPanel card;
+	/**
+	 * El parametro mntmGenerarFactura es donde guardo el menu item para generar el informe de la factura.
+	 */
 	private JMenuItem mntmGenerarFactura;
+	/**
+	 * El parametro mntmFacturasDelCliente es donde guardo el menu item para mostrar las facturas de un determinado cliente
+	 */
 	private JMenuItem mntmFacturasDelCliente;
+	/**
+	 * El parametro mntmClientes es donde guardo el menu item para mostrar los clientes
+	 */
 	private JMenuItem mntmClientes;
+	/**
+	 * El parametro mnConsulta es donde guardo el menu al que añado los menu items
+	 */
 	private JMenu mnConsulta;
+	/**
+	 * En este parametro guardo la barra de menu
+	 */
 	private JMenuBar menuBar;
+	/**
+	 * En este parametro se guarda el panel que se muestra al principio del programa por defecto
+	 */
 	private JPanel panelPorDefecto;
+	/**
+	 * En este parametro guardo el texto que se muestra en el panel por defecto
+	 */
 	private JTextPane txtDefault;
 
 	/**
@@ -107,9 +134,13 @@ public class MainConsultas extends JFrame {
        
 
 	}
-	public void itemStateChanged(String evt) {
+	/**
+	 * Este metodo se usa para cambiar en el CardLayout el panel visible
+	 * @param es el string del parametro al cual se quiere acceder del CardLayout
+	 */
+	public void itemStateChanged(String panel) {
 		CardLayout cl = (CardLayout)(card.getLayout());
-		cl.show(card, evt);
+		cl.show(card, panel);
 	}
 
 }

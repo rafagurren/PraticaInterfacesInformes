@@ -23,6 +23,8 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 public class PanelInformes extends JPanel {
@@ -90,9 +92,11 @@ public class PanelInformes extends JPanel {
 				con = Conexion.getConnection();
 				Map<String, Object> parametros = new HashMap<String, Object>();
 				parametros.put("idJava", textField.getText());
-				JasperPrint print = JasperFillManager.fillReport("informes/InformeFactura.jasper", parametros, con);
-				JasperViewer.viewReport(print);
 				
+				//JasperReport jr = (JasperReport) JRLoader.loadObject(PanelInformes.class.getResource("/informes/InformeFactura.jasper"));
+				
+				JasperPrint print = JasperFillManager.fillReport("/informes/InformeFactura.jasper", parametros, con);
+				JasperViewer.viewReport(print);
 				JasperExportManager.exportReportToPdfFile(print,  ruta);
 			} catch (JRException e) {
 				// TODO Auto-generated catch block
