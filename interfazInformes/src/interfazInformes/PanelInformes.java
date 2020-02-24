@@ -26,13 +26,29 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-
+/**
+ * 
+ * @author Rafael Peral
+ *
+ */
 public class PanelInformes extends JPanel {
+	/**
+	 * Este parametro guarda el texto donde se introduce el id factura para generarla posteriormente
+	 */
 	private JTextField textField;
-	private JFileChooser fileChooser;
+
+	/**
+	 * Este parametro guarda un preparedstatement para realizar consultas parametrizadas
+	 */
 	private Connection con;
 	private Component panel_desktop;
+	/**
+	 * Este parametro guarda la ruta donde se guarda el archivo
+	 */
 	private String ruta;
+	/**
+	 * Este parametro guarda el filechooser que selecciona la ruta de guardado
+	 */
 	private JFileChooser jF1;
 
 	/**
@@ -81,6 +97,9 @@ public class PanelInformes extends JPanel {
 
 	}
 
+	/**
+	 * Este metodo se encarga de crear el informe conectando con el servidor y usandoel jaspersoft
+	 */
 	@SuppressWarnings("deprecation")
 	private void crearInforme() {
 		jF1 = new JFileChooser();
@@ -93,9 +112,13 @@ public class PanelInformes extends JPanel {
 				Map<String, Object> parametros = new HashMap<String, Object>();
 				parametros.put("idJava", textField.getText());
 				
-				//JasperReport jr = (JasperReport) JRLoader.loadObject(PanelInformes.class.getResource("/informes/InformeFactura.jasper"));
+				JasperReport jr = (JasperReport) JRLoader.loadObject(PanelInformes.class.getResource("/informes/InformeFactura.jasper"));
+
+				JasperReport subreport = (JasperReport) JRLoader.loadObject(PanelInformes.class.getResource("/informes/ClienteFactura.jasper"));
+
+				parametros.put("subreport", subreport);
 				
-				JasperPrint print = JasperFillManager.fillReport("/informes/InformeFactura.jasper", parametros, con);
+				JasperPrint print = JasperFillManager.fillReport(jr, parametros, con);
 				JasperViewer.viewReport(print);
 				JasperExportManager.exportReportToPdfFile(print,  ruta);
 			} catch (JRException e) {

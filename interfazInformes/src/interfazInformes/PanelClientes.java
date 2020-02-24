@@ -13,12 +13,28 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
-
+/**
+ * 
+ * @author Rafael Peral
+ *
+ */
 @SuppressWarnings("serial")
 public class PanelClientes extends JPanel {
+	/**
+	 * Este parametro guarda la tabla donde se muestran los clientes
+	 */
 	private JTable table;
+	/**
+	 * Este parametro guarda un preparedstatement para realizar consultas parametrizadas
+	 */
 	private Connection con;
+	/**
+	 * Este parametro guarda un statement para realizar una consulta
+	 */
 	private Statement stmt;
+	/**
+	 * Este parametro guarda el ResultSet donde guardamos el resultado de la consulta para luego mostrarlo
+	 */
 	private ResultSet rs;
 	
 	/**
